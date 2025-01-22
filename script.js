@@ -8,20 +8,31 @@ let currentPlayer, winState;
 const init = function () {
   currentPlayer = 'X';
   winState = false;
-
+  let cells;
   const createDivs = function () {
     for (let i = 0; i < 9; i++) {
       let value = boardState[i];
-      let cells = document.createElement(`div`);
+      cells = document.createElement(`div`);
       cells.innerText = value;
       board.appendChild(cells);
+      cells.classList.add('cell');
     }
   };
   createDivs();
 };
 init();
 
-const switchPlayer = function () {};
+let cell = document.querySelector('.cell');
+
+const switchPlayer = function () {
+  currentPlayer === 'X' ? currentPlayer === 'O' : currentPlayer === 'X';
+};
+const handleCellClick = function () {
+  cell.addEventListener('click', function () {
+    cell.innerText = currentPlayer;
+  });
+};
+handleCellClick();
+
 const checkWin = function () {};
 const checkDraw = function () {};
-const handleCellClick = function () {};
