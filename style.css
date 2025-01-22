@@ -17,7 +17,7 @@ body {
   color: #fff;
   align-self: center;
   justify-self: center;
-  margin-top: 5px;
+  margin-top: 10px;
 }
 
 .board {
@@ -26,10 +26,19 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  gap: 5px;
+  gap: 20px;
   background-color: rgba(49, 123, 36, 0.589);
   border-radius: 20px;
+  padding: 20px;
 }
 .board div {
   border-radius: 10px;
+  background-color: rgba(49, 123, 36, 0.589);
+  transition: 0.2s;
+}
+.board div:hover {
+  transform: scale(1.1);
+}
+.board div:active {
+  transform: scale(0.9);
 }

@@ -2,31 +2,25 @@
 
 const board = document.querySelector('.board');
 const stateText = document.querySelector('.state-text');
+const boardState = ['', '', '', '', '', '', '', '', ''];
 
 let currentPlayer, winState;
 const init = function () {
   currentPlayer = 'X';
   winState = false;
+
+  const createDivs = function () {
+    for (let i = 0; i < 9; i++) {
+      let value = boardState[i];
+      let cells = document.createElement(`div`);
+      cells.innerText = value;
+      board.appendChild(cells);
+    }
+  };
+  createDivs();
 };
 init();
 
-/*
-JavaScript Logic:
-
-The board array keeps track of the game state.
-
-The currentPlayer variable alternates between 'X' and 'O'.
-
-The checkWin function checks for a winning condition.
-
-The checkDraw function checks if the game is a draw.
-
-The handleCellClick function handles cell clicks and updates the game state.
-
-The initializeBoard function resets the game.
-*/
-
-const createDivs = function () {};
 const switchPlayer = function () {};
 const checkWin = function () {};
 const checkDraw = function () {};
