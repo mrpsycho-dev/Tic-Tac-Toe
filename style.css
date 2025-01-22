@@ -12,9 +12,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #fff;
 }
 .state-text {
-  color: #fff;
   align-self: center;
   justify-self: center;
   margin-top: 10px;
