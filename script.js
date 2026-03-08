@@ -2,9 +2,25 @@
 
 const board = document.querySelector('.board');
 const stateText = document.querySelector('.state-text');
+const reset = document.querySelector('.reset');
 
-let currentPlayer = 'X';
-let boardState = ['', '', '', '', '', '', '', '', ''];
+let currentPlayer, boardState, gameActive;
+
+function init() {
+  currentPlayer = 'X';
+  boardState = ['', '', '', '', '', '', '', '', ''];
+  gameActive = true;
+
+  stateText.innerText = "Player X's Turn";
+
+  const cells = document.querySelectorAll('.cell');
+
+  cells.forEach(cell => {
+    cell.innerText = '';
+  });
+}
+init();
+reset.addEventListener('click', init);
 
 const winPositions = [
   [0, 1, 2],
@@ -24,26 +40,26 @@ function createBoard() {
     cell.classList.add('cell');
 
     cell.addEventListener('click', function () {
-      if (boardState[i] !== '') return;
-
+      if (!gameActive || boardState[i] !== '') return;
       boardState[i] = currentPlayer;
       cell.innerText = currentPlayer;
-
       if (checkWin()) {
-        stateText.textContent = `Player ${currentPlayer} Wins !`;
-        return;
+        stateText.innerText = `Player ${currentPlayer} Wins !`;
+        gameActive = false;
+      } else {
+        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        stateText.innerText = `Player ${currentPlayer}'s Turn !`;
       }
-      currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-      stateText.textContent = `Player ${currentPlayer}'s Turn !`;
+      checkDraw();
     });
   }
 }
+
 createBoard();
 
 function checkWin() {
   for (let combo of winPositions) {
     let [a, b, c] = combo;
-
     if (
       boardState[a] !== '' &&
       boardState[a] === boardState[b] &&
@@ -53,4 +69,11 @@ function checkWin() {
     }
   }
   return false;
+}
+
+function checkDraw() {
+  if (!boardState.includes('')) {
+    stateText.innerText = `It is a Draw!`;
+    gameActive = false;
+  }
 }
